@@ -23,6 +23,8 @@ import MarvelStore from '../assets/MarvelStore.png';
 import GamerHub from '../assets/GamerHub.png';
 import RaioXapp from '../assets/RaioXapp.jpeg';
 import Video from '../assets/Video.mp4';
+import MecChill from '../assets/MecChill.png';
+import CestasMimos from '../assets/CestasMimos.png';
 
 export default function App() {
   useEffect(() => {
@@ -226,6 +228,26 @@ export default function App() {
               image={AgentIA}
               repoLink="https://github.com/RobsonMarcolino/Chatbot-Raio-x"
               demoLink="https://github.com/RobsonMarcolino/Chatbot-Raio-x"
+            />
+
+            {/* 5. Mec Chill (Normal - 1 coluna) */}
+            <ProjectCard
+              title="Mec Chill"
+              description="Site institucional para empresa de refrigeração, focado em SEO e performance."
+              tags={['React', 'SEO', 'Performance', 'Bot']}
+              image={MecChill}
+              repoLink="https://github.com/RobsonMarcolino/mec-chill-site"
+              demoLink="https://mecchillrefrigeracao.site/"
+            />
+
+            {/* 6. Cestas e Mimos (Normal - 1 coluna) */}
+            <ProjectCard
+              title="Cestas e Mimos"
+              description="E-commerce de cestas personalizadas e presentes especiais."
+              tags={['React', 'E-commerce', 'UI/UX']}
+              image={CestasMimos}
+              repoLink="https://github.com/RobsonMarcolino/cestas-e-mimos"
+              demoLink="https://cestas-e-mimos.vercel.app/"
             />
           </div>
         </div>
