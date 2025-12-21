@@ -86,16 +86,16 @@ const ProjectCard = ({ title, description, tags, image, video, repoLink, demoLin
                         href={repoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-bold text-[#1A2C24] dark:text-white hover:text-[#FFC107] dark:hover:text-[#FFC107] transition-colors"
+                        className="flex items-center gap-2 text-sm font-bold text-[#1A2C24] dark:text-white hover:text-[#FFC107] dark:hover:text-[#FFC107] transition-colors font-sans"
                     >
                         <Github size={18} />
-                        Código
+                        Code
                     </a>
                     <a
                         href={demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-bold text-[#1A2C24] dark:text-white hover:text-[#FFC107] dark:hover:text-[#FFC107] transition-colors"
+                        className="flex items-center gap-2 text-sm font-bold text-[#1A2C24] dark:text-white hover:text-[#FFC107] dark:hover:text-[#FFC107] transition-colors font-sans"
                     >
                         <ExternalLink size={18} />
                         Live Demo
