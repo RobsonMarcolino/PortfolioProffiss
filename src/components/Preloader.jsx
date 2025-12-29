@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import LoadingVideo from '../assets/LOADING.mp4';
 
 const Preloader = ({ onFinish }) => {
     const [progress, setProgress] = useState(0);
@@ -13,63 +14,53 @@ const Preloader = ({ onFinish }) => {
                     setTimeout(() => {
                         setIsExit(true); // Start fade out
                         setTimeout(onFinish, 800);
-                    }, 200);
+                    }, 500); // Hold for 0.5s at 100%
                     return 100;
                 }
                 return next;
             });
-        }, 20); // 2 second load
+        }, 30); // ~3 seconds load time to enjoy the video
 
         return () => clearInterval(timer);
     }, [onFinish]);
 
     return (
         <div
-            className={`fixed inset-0 z-[9999] flex items-center justify-center transition-all duration-700 ease-in-out ${isExit ? 'opacity-0 backdrop-blur-none pointer-events-none' : 'opacity-100 backdrop-blur-xl bg-white/10 dark:bg-black/20'
+            className={`fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-all duration-1000 ease-in-out ${isExit ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
         >
-            {/* Glass Card */}
-            <div className={`relative p-8 md:p-12 rounded-3xl bg-white/40 dark:bg-black/40 shadow-2xl border border-white/20 dark:border-white/10 backdrop-blur-md flex flex-col items-center gap-6 transition-all duration-500 transform ${isExit ? 'scale-90' : 'scale-100'}`}>
+            {/* Video Background */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover opacity-80"
+                >
+                    <source src={LoadingVideo} type="video/mp4" />
+                </video>
+                {/* Overlay Vignette */}
+                <div className="absolute inset-0 bg-black/40 bg-radial-gradient from-transparent to-black/80 z-10"></div>
+            </div>
 
-                {/* Modern Spinner */}
-                <div className="relative w-16 h-16">
-                    <svg className="w-full h-full transform -rotate-90">
-                        <circle
-                            cx="32"
-                            cy="32"
-                            r="28"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                            fill="none"
-                            className="text-gray-300/30"
-                        />
-                        <circle
-                            cx="32"
-                            cy="32"
-                            r="28"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                            fill="none"
-                            strokeDasharray="175"
-                            strokeDashoffset={175 - (175 * progress) / 100}
-                            className="text-[#FFC107] transition-all duration-75 ease-linear"
-                            strokeLinecap="round"
-                        />
-                    </svg>
-                    {/* Centered Logo/Icon */}
-                    <div className="absolute inset-0 flex items-center justify-center font-black text-xs text-gray-800 dark:text-white">
-                        RM
-                    </div>
+            {/* Minimal Content Overlay */}
+            <div className="relative z-20 flex flex-col items-center mt-[20vh]"> {/* Pushed down a bit */}
+                <h2 className="text-3xl md:text-5xl font-black text-white font-heading tracking-widest drop-shadow-xl mb-4">
+                    Business Solutions Developer.
+                </h2>
+
+                {/* Slim Progress Bar */}
+                <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+                    <div
+                        className="h-full bg-[#FFC107] shadow-[0_0_15px_#FFC107] transition-all duration-out ease-linear"
+                        style={{ width: `${progress}%` }}
+                    ></div>
                 </div>
 
-                <div className="text-center">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1 tracking-tight">
-                        Robson Marcolino
-                    </h2>
-                    <p className="text-xs font-medium text-gray-600 dark:text-gray-300 uppercase tracking-[0.2em] opacity-80">
-                        {progress < 100 ? 'Loading Experience...' : 'Welcome'}
-                    </p>
-                </div>
+                <p className="mt-2 text-xs font-mono text-gray-300 tracking-[0.3em] font-bold drop-shadow-md">
+                    loading experience... {Math.round(progress)}%
+                </p>
             </div>
         </div>
     );
